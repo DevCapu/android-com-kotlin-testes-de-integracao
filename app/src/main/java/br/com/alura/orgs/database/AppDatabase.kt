@@ -33,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
             return db ?: Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,
-                BuildConfig.DATABASE_NAME
+                "orgs.db"
             ).build().also {
                 db = it
             }
