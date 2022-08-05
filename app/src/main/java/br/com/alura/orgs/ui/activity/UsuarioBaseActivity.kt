@@ -25,7 +25,7 @@ abstract class UsuarioBaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
-//            verificaUsuarioLogado()
+            verificaUsuarioLogado()
         }
     }
 
