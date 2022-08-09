@@ -1,10 +1,10 @@
 package br.com.alura.orgs
 
 import androidx.annotation.IdRes
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -30,22 +30,17 @@ class TelasProdutoTests {
 
     @Test
     fun devemMostrarONomeDoAplicativoNaTelaInicial() {
-        Espresso.onView(ViewMatchers.withText("Orgs"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withText("Orgs")).check(matches(isDisplayed()))
     }
 
     @Test
     fun deveTerTodosOsCamposNecessariosParaCriarUmProduto() {
         clicaNoFAB()
 
-        Espresso.onView(ViewMatchers.withId(R.id.activity_formulario_produto_nome))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_formulario_produto_descricao))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_formulario_produto_valor))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.activity_formulario_produto_botao_salvar))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.activity_formulario_produto_nome)).check(matches(isDisplayed()))
+        onView(withId(R.id.activity_formulario_produto_descricao)).check(matches(isDisplayed()))
+        onView(withId(R.id.activity_formulario_produto_valor)).check(matches(isDisplayed()))
+        onView(withId(R.id.activity_formulario_produto_botao_salvar)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -57,12 +52,9 @@ class TelasProdutoTests {
             valor = "10.29"
         )
 
-        Espresso.onView(ViewMatchers.withText("Banana"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("Banana prata"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("R\$ 10,29"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withText("Banana")).check(matches(isDisplayed()))
+        onView(withText("Banana prata")).check(matches(isDisplayed()))
+        onView(withText("R\$ 10,29")).check(matches(isDisplayed()))
     }
 
     @Test
@@ -83,18 +75,15 @@ class TelasProdutoTests {
             valor = "6.19"
         )
 
-        Espresso.onView(ViewMatchers.withText("Jabuticaba"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("Roxa"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("R\$ 6,19"))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withText("Jabuticaba")).check(matches(isDisplayed()))
+        onView(withText("Roxa")).check(matches(isDisplayed()))
+        onView(withText("R\$ 6,19")).check(matches(isDisplayed()))
     }
 
     private fun preencheESalvaProduto(
         nome: String,
         descricao: String,
-        valor: String
+        valor: String,
     ) {
         digita(R.id.activity_formulario_produto_nome, nome)
         digita(R.id.activity_formulario_produto_descricao, descricao)
@@ -102,18 +91,16 @@ class TelasProdutoTests {
         clicaEmSalvar()
     }
 
-
-    private fun digita(@IdRes res: Int, texto: String) =
-        Espresso.onView(ViewMatchers.withId(res)).perform(
-            ViewActions.replaceText(texto),
-            ViewActions.closeSoftKeyboard()
-        )
+    private fun digita(
+        @IdRes res: Int,
+        texto: String,
+    ) = onView(withId(res)).perform(replaceText(texto), closeSoftKeyboard())
 
     private fun clicaEmSalvar() = clica(R.id.activity_formulario_produto_botao_salvar)
-    private fun clicaNoFAB() = clica(R.id.activity_lista_produtos_fab)
-    private fun clica(@IdRes res: Int) = Espresso.onView(ViewMatchers.withId(res))
-        .perform(ViewActions.click())
 
-    private fun clica(texto: String) = Espresso.onView(ViewMatchers.withText(texto))
-        .perform(ViewActions.click())
+    private fun clicaNoFAB() = clica(R.id.activity_lista_produtos_fab)
+
+    private fun clica(@IdRes res: Int) = onView(withId(res)).perform(click())
+
+    private fun clica(texto: String) = onView(withText(texto)).perform(click())
 }
