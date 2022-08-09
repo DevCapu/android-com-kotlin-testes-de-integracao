@@ -24,7 +24,7 @@ class TelasProdutoTests {
     val activityRule = ActivityScenarioRule(ListaProdutosActivity::class.java)
 
     @Before
-    fun limpaBancoDeDados() {
+    fun prepara() {
         AppDatabase.instancia(InstrumentationRegistry.getInstrumentation().context).clearAllTables()
     }
 
