@@ -13,6 +13,4 @@ class ProdutoRepository(
     fun buscaPorId(id: Long) = dao.buscaPorId(id)
 
     fun buscaTodos() = dao.buscaTodos()
-
-    fun buscaTodosDoUsuario(usuarioId: String) = dao.buscaTodosDoUsuario(usuarioId)
 }
